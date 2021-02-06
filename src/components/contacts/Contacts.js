@@ -1,6 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import Contact from './Contact';
 
 const Contacts = () => {
+    const contacts = useSelector(state => state.contacts);
+    // console.log(contacts)
     return (
         <div className="container py-5">
             <table className="table">
@@ -16,16 +20,9 @@ const Contacts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <i class="fa fa-pencil mr-3"></i>
-                            <i class="fa fa-trash"></i>
-                        </td>
-                    </tr>
+                    {
+                        contacts.map(contact => <Contact contact={contact} />)
+                    }
                 </tbody>
             </table>
         </div>
