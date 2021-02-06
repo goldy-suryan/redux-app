@@ -1,12 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import Contact from './Contact';
+import { Link } from 'react-router-dom';
 
 const Contacts = () => {
     const contacts = useSelector(state => state.contacts);
     // console.log(contacts)
     return (
         <div className="container py-5">
+            <Link to="/contacts/add" className="btn btn-primary pull-right mb-3">
+                Add Contact
+            </Link>
             <table className="table">
                 <thead>
                     <tr>

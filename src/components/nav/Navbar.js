@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
         <div>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">Basic CRUD using Redux</a>
+                    <Link to="/" className="navbar-brand">Basic CRUD using Redux</Link>
                 </div>
             </nav>
         </div>
