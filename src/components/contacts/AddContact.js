@@ -1,13 +1,22 @@
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/actions/contact-action';
+import shortid from 'shortid';
+import { useHistory } from 'react-router-dom';
 
 const AddContact = () => {
     let [name, setName] = useState("");
     let [email, setEmail] = useState("");
     let [phone, setPhone] = useState("");
+    let dispatch = useDispatch();
+    let history = useHistory();
 
     const submitForm = () => {
         console.log(name, email, phone);
+        let id = shortid.generate();
+        dispatch(addContact({id, name, email, phone}));
+        history.push('/')
     }
 
     return (

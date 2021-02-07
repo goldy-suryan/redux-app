@@ -3,7 +3,8 @@ import Avatar from 'react-avatar';
 
 
 const Contact = ({ contact }) => {
-    let { name, email, phone } = contact;
+    let {name, email, phone } = contact;
+
     return (
         <tr>
             <th scope="row">
