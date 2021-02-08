@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/actions/contact-action';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact, editContact } from '../../redux/actions/contact-action';
 import shortid from 'shortid';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const AddContact = () => {
     let [name, setName] = useState("");
     let [email, setEmail] = useState("");
     let [phone, setPhone] = useState("");
+    let [pathId, setPathId] = useState("");
     let dispatch = useDispatch();
     let history = useHistory();
+    let location = useLocation();
+    let contacts = useSelector(state => state.contactList.contacts);
+
+    let singleContact = {}
+
+
+    useEffect(() => {
+        setPathId(location.pathname.split('/').pop())
+        if(pathId &&  pathId !== 'add') {
+            singleContact = contacts.filter(item => item.id === pathId);
+            setName(singleContact[0].name);
+            setEmail(singleContact[0].email);
+            setPhone(singleContact[0].phone);
+        }
+    }, [pathId])
+
 
     const submitForm = () => {
-        console.log(name, email, phone);
-        let id = shortid.generate();
-        dispatch(addContact({id, name, email, phone}));
+        if(pathId && pathId !== 'add') {
+            dispatch(editContact({id: pathId, name, email, phone}));
+        } else {
+            let id = shortid.generate();
+            dispatch(addContact({id, name, email, phone}));
+        }
         history.push('/')
     }
 

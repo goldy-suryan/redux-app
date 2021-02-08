@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 const Contacts = () => {
-    const contacts = useSelector(state => state.contacts);
+    const contacts = useSelector(state => state.contactList.contacts);
     // console.log(contacts)
     return (
         <div className="container py-5">
